@@ -27,41 +27,39 @@ Things you may want to cover:
 ## usersテーブル
 |Column|Type|Options|
 |------|----|-------|
-|username|string|index: true, null: false, unique: true|
-|email|string|index: true, null: false, unique: true|
-|password|integer|null: false, foreign_key: true|
+|name|string|index: true, null: false, unique: true|
 
 ### Association（users）
 - has_many :group
 - has_many :post
-- belongs_to :groups_users
+- has_many :groups_users, through: :group
 
-## groups_usersテーブル
+## groups_usersテーブル（中間テーブル）
 |Column|Type|Options|
 |------|----|-------|
 |user_id|integer|null: false, foreign_key: true|
 |group_id|integer|null: false, foreign_key: true|
 
 ### Association（groups_usersテーブル）
--has_many:user
--has_many:group
+- belongs_to :user
+- belongs_to :group
 
-## groupsテーブル（中間テーブル）
+## groupsテーブル
 |Column|Type|Options|
 |------|----|-------|
-|groupname|string|index: true, null: false, unique: true|
+|name|string|index: true, null: false, unique: true|
 |user_id|integer|null: false, foreign_key: true|
 
 ### Association（groups）
 - has_many :user
-- belongs_to :groups_users
+- has_many :groups_users, through: :user
 
 ## postsテーブル
 |Column|Type|Options|
 |------|----|-------|
-|text|text|index: true, null: false|
-|photo|string|null: false, foreign_key: true|
+|text|text|index: true|
+|image|string||
 
 ### Association（posts）
-- has_many :group
-- has_many :user
+- belongs_to :group
+- belongs_to :user
