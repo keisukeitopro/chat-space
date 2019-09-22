@@ -30,9 +30,9 @@ Things you may want to cover:
 |name|string|index: true, null: false, unique: true|
 
 ### Association（users）
-- has_many :groups
 - has_many :posts
 - has_many :groups, through: :groups_users
+- has_many :groups_users
 
 ## groups_usersテーブル（中間テーブル）
 |Column|Type|Options|
@@ -50,15 +50,15 @@ Things you may want to cover:
 |name|string|index: true, null: false, unique: true|
 
 ### Association（groups）
-- has_many :users
 - has_many :posts
 - has_many :users, through: :groups_users
+- has_many :groups_users
 
 
 ## postsテーブル
 |Column|Type|Options|
 |------|----|-------|
-|text|text|null: false|
+|text|text||
 |image|string||
 |user_id|integer|null: false, foreign_key: true|
 |group_id|integer|null: false, foreign_key: true|
